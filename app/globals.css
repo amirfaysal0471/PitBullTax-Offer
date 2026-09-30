@@ -1,26 +1,186 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   Design tokens
+   ========================================================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand */
+  --red: #e8141f;
+  --red-dark: #c31018;
+  --red-soft: #fee9ea;
+
+  /* Dark surfaces */
+  --navy: #0a1728;
+  --navy-2: #101f38;
+  --navy-3: #16253f;
+  --ink: #0b1017;
+  --footer: #050a14;
+
+  /* Light surfaces */
+  --paper: #f3f5f9;
+  --paper-2: #e9edf4;
+
+  /* Text */
+  --text: #0b1220;
+  --text-2: #5a6478;
+  --text-3: #8b94a6;
+  --on-dark-2: #c0c9d9;
+  --on-dark-3: #8695ad;
+
+  /* Lines */
+  --line: #e2e7ef;
+  --line-dark: rgb(255 255 255 / 8%);
+
+  /* Form fields */
+  --input: #d7dde7;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-archivo);
+  --font-mono: var(--font-mono-jb);
+
+  --color-red: var(--red);
+  --color-red-dark: var(--red-dark);
+  --color-red-soft: var(--red-soft);
+
+  --color-navy: var(--navy);
+  --color-navy-2: var(--navy-2);
+  --color-navy-3: var(--navy-3);
+  --color-ink: var(--ink);
+  --color-footer: var(--footer);
+
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+  --color-on-dark-2: var(--on-dark-2);
+  --color-on-dark-3: var(--on-dark-3);
+
+  --color-line: var(--line);
+  --color-line-dark: var(--line-dark);
+
+  --color-input: var(--input);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    border-color: var(--line);
+    outline-color: rgb(232 20 31 / 50%);
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  body {
+    background: #ffffff;
+    color: var(--text);
+  }
+  ::selection {
+    background: var(--red);
+    color: #fff;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container-page {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 75rem; /* 1200px */
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container-page {
+      padding-inline: 3rem;
+    }
+  }
+
+  /* Heavy grotesque display type, very tight tracking */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 0.96;
+    text-wrap: balance;
+  }
+  .t-h1 {
+    font-size: clamp(2.5rem, 1.5rem + 3.4vw, 4.25rem);
+    line-height: 1;
+  }
+  .t-h2 {
+    font-size: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
+  }
+  .t-quote {
+    font-size: clamp(1.875rem, 1.2rem + 2.4vw, 3rem);
+    line-height: 1.1;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .mono-xs {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+
+  .btn-red,
+  .btn-outline-dark,
+  .btn-outline-light,
+  .btn-ink {
+    @apply inline-flex h-12 items-center justify-center gap-2.5 rounded-[4px] px-6 text-[0.9375rem] font-semibold whitespace-nowrap transition-colors;
+  }
+  .btn-red {
+    @apply bg-red text-white hover:bg-red-dark;
+  }
+  .btn-outline-dark {
+    @apply border border-white/25 bg-transparent text-white hover:bg-white/10;
+  }
+  .btn-outline-light {
+    @apply border border-text/15 bg-white text-text hover:bg-paper;
+  }
+  .btn-ink {
+    @apply bg-ink text-white hover:bg-navy;
+  }
+}
+
+@layer utilities {
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 4%) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 4%) 1px, transparent 1px);
+    background-size: 68px 68px;
+  }
+  .glow-red {
+    background: radial-gradient(
+      circle,
+      rgb(232 20 31 / 30%) 0%,
+      rgb(232 20 31 / 8%) 40%,
+      transparent 70%
+    );
+  }
+  .rule-dotted {
+    background-image: linear-gradient(
+      to right,
+      currentColor 0 4px,
+      transparent 4px 9px
+    );
+    background-repeat: repeat-x;
+    background-size: 9px 1px;
+  }
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 2px #fff;
+  }
 }
