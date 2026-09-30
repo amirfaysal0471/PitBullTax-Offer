@@ -3,6 +3,8 @@
 Landing page for **offer.pitbulltax.com** (IRS transcript delivery & monitoring),
 built with Next.js 16 (App Router), React 19 and Tailwind CSS 4.
 
+**Live:** https://pitbulltax-offer.vercel.app
+
 ## Getting started
 
 ```bash
