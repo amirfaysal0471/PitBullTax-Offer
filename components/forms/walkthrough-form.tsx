@@ -10,6 +10,12 @@ const fieldClass =
   "h-11 w-full rounded-[4px] border border-input bg-white px-3 text-[0.9375rem] text-text placeholder:text-text-3 focus-visible:border-red focus-visible:ring-2 focus-visible:ring-red/15 focus-visible:outline-none";
 const labelClass = "block text-[0.875rem] font-semibold text-text";
 
+// Formats US phone input as xxx-xxx-xxxx, the format the CRM expects.
+function formatPhone(value: string) {
+  const digits = value.replace(/\D/g, "").replace(/^1(?=\d{10})/, "").slice(0, 10);
+  return [digits.slice(0, 3), digits.slice(3, 6), digits.slice(6)].filter(Boolean).join("-");
+}
+
 type WalkthroughFormProps = {
   title: string;
   helper: string;
@@ -81,7 +87,14 @@ export function WalkthroughForm({
       label="Phone"
       type="tel"
       autoComplete="tel"
-      placeholder="(555) 555-0123"
+      inputMode="numeric"
+      placeholder="555-555-0123"
+      pattern="\d{3}-\d{3}-\d{4}"
+      title="Phone number in the format xxx-xxx-xxxx"
+      onInput={(event) => {
+        event.currentTarget.value = formatPhone(event.currentTarget.value);
+      }}
+      required={!compact}
     />
   );
 

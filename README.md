@@ -1,7 +1,10 @@
-# PitBullTax — Offer landing page
+# PitBullTax — Offer 1 landing page
 
 Landing page for **offer.pitbulltax.com** (IRS transcript delivery & monitoring),
 built with Next.js 16 (App Router), React 19 and Tailwind CSS 4.
+
+Package: `pitbulltax-offer-1` · Repo: https://github.com/amirfaysal0471/PitBullTax-Offer
+Sister project: `../Offer-2` (offer2.pitbulltax.com, tax resolution platform) is a separate repo.
 
 **Live:** https://pitbulltax-offer.vercel.app
 
@@ -10,7 +13,7 @@ built with Next.js 16 (App Router), React 19 and Tailwind CSS 4.
 ```bash
 npm install
 cp .env.example .env.local   # then fill in the values
-npm run dev                  # http://localhost:3000
+npm run dev                  # http://localhost:3000 (Offer 2 uses 3001)
 ```
 
 Other scripts: `npm run build`, `npm start`, `npm run lint`, `npm run typecheck`,
@@ -65,6 +68,7 @@ Page copy lives in `lib/content.ts`; edit text there rather than in the componen
 ```
 
 `source` is `hero` (short form: name, email, phone) or `walkthrough` (full form).
+`page` is always `offer`, so the CRM can tell these leads apart from Offer 2 (`offer2`).
 
 ## Before launch
 

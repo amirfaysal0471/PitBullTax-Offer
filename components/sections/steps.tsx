@@ -40,7 +40,7 @@ export function Steps() {
                     alt={step.alt}
                     fill
                     sizes="(max-width: 640px) 90vw, 30vw"
-                    className="object-cover object-top-left"
+                    className="object-contain"
                   />
                 )}
               </div>

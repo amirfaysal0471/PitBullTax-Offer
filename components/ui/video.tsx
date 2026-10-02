@@ -32,9 +32,9 @@ export function Video({
       {playing ? (
         <iframe
           className="absolute inset-0 size-full"
-          src={`https://www.youtube-nocookie.com/embed/${videos.id}?autoplay=1&rel=0&modestbranding=1`}
+          src={`https://fast.wistia.net/embed/iframe/${videos.wistiaId}?autoplay=1`}
           title={videos.title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
         />
       ) : (
@@ -45,7 +45,7 @@ export function Video({
           className="group absolute inset-0 size-full cursor-pointer"
         >
           <Image
-            src={poster?.src ?? `https://i.ytimg.com/vi/${videos.id}/maxresdefault.jpg`}
+            src={poster?.src ?? videos.poster}
             alt={poster?.alt ?? ""}
             fill
             unoptimized={!poster}

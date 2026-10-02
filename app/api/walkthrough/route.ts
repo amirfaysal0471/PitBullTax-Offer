@@ -13,6 +13,14 @@ type Lead = {
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Normalizes a US phone number to xxx-xxx-xxxx; returns "" when it is not 10 digits.
+function phoneNumber(value: unknown) {
+  const digits = text(value, 40).replace(/\D/g, "").replace(/^1(?=\d{10})/, "");
+  return digits.length === 10
+    ? `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`
+    : "";
+}
+
 function text(value: unknown, max: number) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
 }
@@ -24,7 +32,7 @@ function parseLead(body: Record<string, unknown>): Lead | string {
     firstName: text(body.firstName, 100),
     lastName: text(body.lastName, 100) || undefined,
     email: text(body.email, 254).toLowerCase(),
-    phone: text(body.phone, 40) || undefined,
+    phone: phoneNumber(body.phone) || undefined,
     state: text(body.state, 60) || undefined,
     professionalType: text(body.professionalType, 60) || undefined,
     comments: text(body.comments, 2000) || undefined,
@@ -36,6 +44,7 @@ function parseLead(body: Record<string, unknown>): Lead | string {
   // The full form (red section) also requires last name, state and professional type.
   if (source === "walkthrough") {
     if (!lead.lastName) return "Last name is required.";
+    if (!lead.phone) return "Please enter a phone number in the format xxx-xxx-xxxx.";
     if (!lead.state || !usStates.includes(lead.state)) return "Please select a state.";
     if (!lead.professionalType || !professionalTypes.includes(lead.professionalType)) {
       return "Please select a professional type.";

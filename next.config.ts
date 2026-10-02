@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   agentRules: false,
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },
+      { protocol: "https", hostname: "embed-ssl.wistia.com", pathname: "/deliveries/**" },
     ],
   },
 };

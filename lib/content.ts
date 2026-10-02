@@ -1,9 +1,9 @@
 export const site = {
-  logo: "/brand/pitbulltax-software.png",
+  logo: "/brand/pitbulltax-transcripts.svg",
   phone: "954-748-2855",
   phoneHref: "tel:+19547482855",
-  privacyHref: "https://pitbulltax.com/page/privacy-policy.html",
-  termsHref: "https://pitbulltax.com/page/terms-and-conditions.html",
+  privacyHref: "https://www.pitbulltax.com/page/privacy-policy.html",
+  termsHref: "https://www.pitbulltax.com/page/terms-and-conditions.html",
 };
 
 export const meta = {
@@ -21,9 +21,12 @@ export const nav = [
 
 export const headerCta = "Book a walkthrough";
 
+// Same Wistia video as the live offer.pitbulltax.com page.
 export const videos = {
-  id: "KY9KkFmeW8A",
+  wistiaId: "5aswuak8kt",
   title: "PitBullTax transcript walkthrough",
+  poster:
+    "https://embed-ssl.wistia.com/deliveries/e4a5b24c9fa1ecb2b19c920fa04741e055c509a8.jpg?image_crop_resized=1280x720",
 };
 
 const walkthroughSuccess =
@@ -218,6 +221,7 @@ export const platform = {
       body: "Review transaction codes, account events, and balances in a structured view.",
       links: ["Transcript reports", "Account activity"],
       image: {
+        label: "IRS Tax Liability",
         src: "/screens/irs-tax-liability-rows.webp",
         width: 920,
         height: 372,
@@ -228,16 +232,38 @@ export const platform = {
       title: "Monitor",
       body: "Keep track of changes in enrolled, authorized accounts that need attention.",
       links: ["Alerts", "Monitoring"],
+      // Screens below are from the live offer.pitbulltax.com page.
+      image: {
+        label: "View Reports",
+        src: "/live/admin-access-sharing.webp",
+        width: 509,
+        height: 305,
+        alt: "PitBullTax Transcripts View Reports screen with the transcripts menu, including View Alerts and Scheduled Alerts, and a list of sample client reports",
+      },
     },
     {
       title: "Report",
       body: "Turn account activity into a summary your client can follow.",
       links: ["Client summary", "Reports"],
+      image: {
+        label: "Offer in Compromise Filings",
+        src: "/live/audit-report-trail.webp",
+        width: 496,
+        height: 307,
+        alt: "PitBullTax Offer in Compromise filings report with success rate, accepted offers chart and a table of sample clients",
+      },
     },
     {
       title: "Authorize",
       body: "Keep the authorization steps connected to the transcript workflow.",
       links: ["Forms 8821 and 2848"],
+      image: {
+        label: "Power of Attorney",
+        src: "/screens/authorization-steps.webp",
+        width: 690,
+        height: 374,
+        alt: "PitBullTax Step-by-Step Workflow with Bulk 2848/8821 in the tools menu and Step 3, File Power of Attorney / Tax Information Authorization, marked completed",
+      },
     },
   ],
 };
@@ -326,19 +352,17 @@ export const steps = {
   ],
 };
 
+// Values match the CRM (Keap) dropdown used by the existing offer.pitbulltax.com form.
 export const professionalTypes = [
-  "Enrolled Agent",
-  "CPA",
-  "Tax Attorney",
-  "Tax Preparer",
-  "Firm Owner",
-  "Tax Staff",
-  "Other",
+  "Accounting Professional",
+  "Tax Professional",
+  "Legal Professional",
 ];
 
+// The 50 states offered by the CRM's State dropdown.
 export const usStates = [
   "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",
-  "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia",
+  "Connecticut", "Delaware", "Florida", "Georgia",
   "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
   "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota",
   "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire",
@@ -346,7 +370,6 @@ export const usStates = [
   "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
   "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont",
   "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming",
-  "Puerto Rico", "Outside the U.S.",
 ];
 
 export const walkthrough = {

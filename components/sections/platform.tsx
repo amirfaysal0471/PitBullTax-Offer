@@ -91,7 +91,7 @@ export function Platform() {
                   <div className="mt-auto pt-8">
                     <div className="overflow-hidden rounded-[5px] border border-line-dark bg-white">
                       <p className="border-l-4 border-[#f0506e] bg-[#d9ecfc] px-3 py-2 text-[0.8125rem] font-bold tracking-[0.02em] text-[#0b1220] uppercase">
-                        IRS Tax Liability
+                        {card.image.label}
                       </p>
                       <Image
                         src={card.image.src}

@@ -7,9 +7,9 @@ export function Logo({ className, eager = false }: { className?: string; eager?:
   return (
     <Image
       src={site.logo}
-      alt="PitBullTax Software"
-      width={1830}
-      height={524}
+      alt="PitBullTax Transcripts"
+      width={167}
+      height={49}
       loading={eager ? "eager" : undefined}
       className={cn("h-7 w-auto shrink-0 self-start object-contain object-left sm:h-8", className)}
     />
