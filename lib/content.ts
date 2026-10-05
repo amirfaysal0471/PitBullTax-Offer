@@ -39,10 +39,11 @@ export const hero = {
   primary: "Book a 30-minute walkthrough",
   secondary: "Explore an example transcript",
   visual: {
-    src: "/screens/transcripts-dashboard.webp",
-    width: 1625,
-    height: 968,
-    alt: "PitBullTax Transcripts Dashboard showing IRS tax liability by client, tax periods, earliest CSED and current resolution",
+    // Standalone PitBullTax Transcripts screen (not the full software).
+    src: "/live/admin-access-sharing.webp",
+    width: 509,
+    height: 305,
+    alt: "PitBullTax Transcripts View Reports screen with the transcripts menu and a list of sample client transcript reports",
   },
   form: {
     title: "See it with your workflow",
@@ -204,16 +205,12 @@ export const platform = {
       title: "Request",
       body: "Select clients, transcript types, and tax periods, then manage results in one queue.",
       links: ["Bulk requests", "Scheduled requests"],
-      // Real menu labels from the PitBullTax "IRS Transcripts Delivery" sidebar.
-      menu: {
-        title: "IRS Transcripts Delivery",
-        items: [
-          "Request Transcripts",
-          "Bulk Request",
-          "Scheduled Transcripts",
-          "View Transcripts",
-          "Transcript Reports",
-        ],
+      image: {
+        label: "Request Transcripts",
+        src: "/screens/request-transcripts-standalone.webp",
+        width: 1468,
+        height: 857,
+        alt: "PitBullTax Request Transcripts screen with taxpayer details and transcript types, including account, wage and income, and record of account, with selectable tax periods",
       },
     },
     {
@@ -221,24 +218,23 @@ export const platform = {
       body: "Review transaction codes, account events, and balances in a structured view.",
       links: ["Transcript reports", "Account activity"],
       image: {
-        label: "IRS Tax Liability",
-        src: "/screens/irs-tax-liability-rows.webp",
-        width: 920,
-        height: 372,
-        alt: "PitBullTax IRS tax liability table listing sample clients with total liability, tax forms and periods, earliest CSED and current resolution",
+        label: "Account Transcript Summary",
+        src: "/screens/account-transcript-summary-standalone.webp",
+        width: 650,
+        height: 460,
+        alt: "PitBullTax Account Transcript Summary Report for a sample taxpayer, listing each period's transactions with codes, explanations, dates and amounts",
       },
     },
     {
       title: "Monitor",
       body: "Keep track of changes in enrolled, authorized accounts that need attention.",
       links: ["Alerts", "Monitoring"],
-      // Screens below are from the live offer.pitbulltax.com page.
       image: {
-        label: "View Reports",
-        src: "/live/admin-access-sharing.webp",
-        width: 509,
-        height: 305,
-        alt: "PitBullTax Transcripts View Reports screen with the transcripts menu, including View Alerts and Scheduled Alerts, and a list of sample client reports",
+        label: "View Alerts",
+        src: "/screens/view-alerts-standalone.webp",
+        width: 1395,
+        height: 945,
+        alt: "PitBullTax View Alerts screen listing account events such as tax return filed, notice issued CP 504 and offer in compromise accepted",
       },
     },
     {
@@ -246,23 +242,29 @@ export const platform = {
       body: "Turn account activity into a summary your client can follow.",
       links: ["Client summary", "Reports"],
       image: {
-        label: "Offer in Compromise Filings",
-        src: "/live/audit-report-trail.webp",
-        width: 496,
-        height: 307,
-        alt: "PitBullTax Offer in Compromise filings report with success rate, accepted offers chart and a table of sample clients",
+        label: "Income Tax Liability Report",
+        src: "/screens/income-tax-liability-report-standalone.webp",
+        width: 650,
+        height: 460,
+        alt: "PitBullTax Income Tax Liability Report for a sample taxpayer with tax assessed, penalties, interest and balance due by period",
       },
     },
     {
       title: "Authorize",
       body: "Keep the authorization steps connected to the transcript workflow.",
       links: ["Forms 8821 and 2848"],
-      image: {
-        label: "Power of Attorney",
-        src: "/screens/authorization-steps.webp",
-        width: 690,
-        height: 374,
-        alt: "PitBullTax Step-by-Step Workflow with Bulk 2848/8821 in the tools menu and Step 3, File Power of Attorney / Tax Information Authorization, marked completed",
+      // Form 8821 preview built from the IRS form's own sections (sample values only).
+      form: {
+        number: "8821",
+        title: "Tax Information Authorization",
+        rows: [
+          { label: "1. Taxpayer", value: "John Doe" },
+          { label: "2. Designee", value: "Your firm" },
+          { label: "3. Tax matters", value: "1040 · 2019–2024" },
+          // Only shown where the card has room (tablet widths).
+          { label: "Signature", value: "Taxpayer e-sign", wide: true },
+        ],
+        status: "E-sign and submit online",
       },
     },
   ],
@@ -293,16 +295,16 @@ export const product = {
   videoLabel: "Watch the PitBullTax transcript walkthrough",
   videoCaption: "Follow a sample request through the platform.",
   shots: [
-    // TODO: replace with a sanitized "Transcript request queue" screen when available.
+    // Standalone PitBullTax Transcripts screens (replacement images).
     {
-      src: "/screens/transcripts-request-tools.webp",
-      alt: "PitBullTax Transcripts Dashboard with the IRS Transcripts Delivery tools menu (Request Transcripts, Bulk Request, Scheduled Transcripts, Transcripts Monitoring) and Update All, Update Selected and Download All actions",
+      src: "/screens/request-transcripts-standalone.webp",
+      alt: "PitBullTax Request Transcripts screen with taxpayer details, transcript types and selectable tax periods",
       title: "Transcript request queue",
       caption: "Manage client, type, period, and request status.",
     },
     {
-      src: "/screens/account-activity-report.webp",
-      alt: "PitBullTax IRS tax liability table with balances, tax periods, earliest CSED and current resolution, above Offer in Compromise filing results",
+      src: "/screens/account-transcript-summary-standalone.webp",
+      alt: "PitBullTax Account Transcript Summary Report with each period's transactions, codes, dates and amounts",
       title: "Account activity and report",
       caption: "Review key information before sharing a summary.",
     },
@@ -337,16 +339,16 @@ export const steps = {
       n: "2",
       title: "See the workflow",
       body: "Follow a request through account activity, monitoring, and reporting.",
-      image: "/screens/step-by-step-workflow.jpg",
-      alt: "PitBullTax Step-by-Step Workflow screen showing case steps, including getting IRS transcripts and generating transcript reports, with their status",
+      image: "/screens/account-transcript-summary-standalone.webp",
+      alt: "PitBullTax Account Transcript Summary Report with each period's transactions, codes, dates and amounts",
       video: false,
     },
     {
       n: "3",
       title: "Explore the fit",
       body: "Discuss access, training, and available next steps with the PitBullTax team.",
-      image: "/steps/step-3-training-library.webp",
-      alt: "PitBullTax Video Tutorials library showing tax resolution software demonstrations, including how to read and analyze IRS transcripts",
+      image: "/screens/view-alerts-standalone.webp",
+      alt: "PitBullTax View Alerts screen listing account events such as tax return filed and notices issued",
       video: false,
     },
   ],

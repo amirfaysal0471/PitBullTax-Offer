@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Check, ChevronRight } from "lucide-react";
+import { Check } from "lucide-react";
 
 import { cn } from "cn";
 import { platform, offerings } from "@/lib/content";
@@ -51,7 +51,7 @@ export function Platform() {
                   {card.body}
                 </p>
 
-                <ul className={cn("flex flex-wrap gap-2", large ? "mt-5" : "mt-auto pt-8")}>
+                <ul className="mt-5 flex flex-wrap gap-2">
                   {card.links.map((link) => (
                     <li
                       key={link}
@@ -65,45 +65,57 @@ export function Platform() {
                   ))}
                 </ul>
 
-                {"menu" in card && card.menu ? (
-                  <div className="mt-auto pt-8">
-                    <div className="rounded-[5px] bg-white p-4 shadow-[0_18px_40px_rgba(0,0,0,.25)] sm:p-5">
-                      <p className="flex items-center justify-between border-b border-line pb-3 text-[0.9375rem] font-bold text-[#0b4fa8]">
-                        {card.menu.title}
-                        <span className="mono-xs font-normal text-text-3">Tools</span>
-                      </p>
-                      <ul className="mt-2 grid">
-                        {card.menu.items.map((item) => (
-                          <li
-                            key={item}
-                            className="flex items-center justify-between border-b border-line/70 py-2 text-[0.875rem] text-text last:border-0"
-                          >
-                            {item}
-                            <ChevronRight className="size-3.5 text-text-3" />
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ) : null}
+                {/* Every visual sits in the same-ratio box at the bottom, so cards line up. */}
+                <div className="mt-auto pt-8">
+                  <div className="flex aspect-[16/11] flex-col overflow-hidden rounded-[5px] border border-line-dark bg-white shadow-[0_18px_40px_rgba(0,0,0,.25)]">
+                    {"form" in card && card.form ? (
+                      <div className="flex flex-1 flex-col text-text">
+                        <div className="flex items-stretch border-b-2 border-text">
+                          <p className="border-r-2 border-text px-3 py-1.5 leading-none">
+                            <span className="block text-[0.625rem]">Form</span>
+                            <span className="font-display text-[1.125rem] font-extrabold">{card.form.number}</span>
+                          </p>
+                          <p className="flex items-center px-3 text-[0.8125rem] leading-[1.2] font-bold">{card.form.title}</p>
+                        </div>
+                        <dl className="grid content-start">
+                          {card.form.rows.map((row) => (
+                            <div
+                              key={row.label}
+                              className={cn(
+                                "flex justify-between gap-3 border-b border-line px-3 py-1.5 text-[0.75rem]",
+                                "wide" in row && row.wide && "max-sm:hidden lg:hidden",
+                              )}
+                            >
+                              <dt className="font-semibold">{row.label}</dt>
+                              <dd className="truncate text-text-2">{row.value}</dd>
+                            </div>
+                          ))}
+                        </dl>
+                        <p className="mt-auto flex items-center gap-2 bg-[#d9ecfc] px-3 py-1.5 text-[0.75rem] font-bold text-[#0b4fa8]">
+                          <Check className="size-3.5" strokeWidth={3} />
+                          {card.form.status}
+                        </p>
+                      </div>
+                    ) : null}
 
-                {"image" in card && card.image ? (
-                  <div className="mt-auto pt-8">
-                    <div className="overflow-hidden rounded-[5px] border border-line-dark bg-white">
-                      <p className="border-l-4 border-[#f0506e] bg-[#d9ecfc] px-3 py-2 text-[0.8125rem] font-bold tracking-[0.02em] text-[#0b1220] uppercase">
-                        {card.image.label}
-                      </p>
-                      <Image
-                        src={card.image.src}
-                        alt={card.image.alt}
-                        width={card.image.width}
-                        height={card.image.height}
-                        sizes="(max-width: 1024px) 88vw, 540px"
-                        className="h-auto w-full"
-                      />
-                    </div>
+                    {"image" in card && card.image ? (
+                      <>
+                        <p className="shrink-0 border-l-4 border-[#f0506e] bg-[#d9ecfc] px-3 py-2 text-[0.75rem] font-bold tracking-[0.02em] text-[#0b1220] uppercase">
+                          {card.image.label}
+                        </p>
+                        <div className="relative flex-1">
+                          <Image
+                            src={card.image.src}
+                            alt={card.image.alt}
+                            fill
+                            sizes={large ? "(max-width: 1024px) 88vw, 540px" : "(max-width: 1024px) 88vw, 360px"}
+                            className="object-cover object-top"
+                          />
+                        </div>
+                      </>
+                    ) : null}
                   </div>
-                ) : null}
+                </div>
               </article>
             );
           })}

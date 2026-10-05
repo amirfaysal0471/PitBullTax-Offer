@@ -33,7 +33,7 @@ export function Product() {
                   alt={shot.alt}
                   fill
                   sizes="(max-width: 1024px) 92vw, 600px"
-                  className="object-contain"
+                  className="object-cover object-left-top"
                 />
               </div>
               <figcaption className="px-3 pt-4 pb-2">
