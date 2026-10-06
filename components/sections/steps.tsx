@@ -27,20 +27,37 @@ export function Steps() {
                 ) : null}
               </div>
 
-              <div className="relative mt-6 flex aspect-video items-center justify-center overflow-hidden rounded-[4px] border border-line bg-paper">
+              {/* 4:3 frame; screens use contain + center top so nothing is cropped. */}
+              <div className="relative mt-6 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[4px] border border-line bg-paper">
                 {step.video ? (
                   <Video
                     compact
                     className="w-full rounded-none bg-paper"
                     poster={{ src: step.image, alt: step.alt }}
                   />
+                ) : "href" in step && step.href ? (
+                  <a
+                    href={step.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${step.alt} (opens YouTube)`}
+                    className="absolute inset-0 transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-red"
+                  >
+                    <Image
+                      src={step.image}
+                      alt={step.alt}
+                      fill
+                      sizes="(max-width: 640px) 90vw, 30vw"
+                      className="object-contain object-top"
+                    />
+                  </a>
                 ) : (
                   <Image
                     src={step.image}
                     alt={step.alt}
                     fill
                     sizes="(max-width: 640px) 90vw, 30vw"
-                    className="object-cover object-left-top"
+                    className="object-contain object-top"
                   />
                 )}
               </div>

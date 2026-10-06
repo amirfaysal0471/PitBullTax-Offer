@@ -12,8 +12,13 @@ const labelClass = "block text-[0.875rem] font-semibold text-text";
 
 // Formats US phone input as xxx-xxx-xxxx, the format the CRM expects.
 function formatPhone(value: string) {
-  const digits = value.replace(/\D/g, "").replace(/^1(?=\d{10})/, "").slice(0, 10);
-  return [digits.slice(0, 3), digits.slice(3, 6), digits.slice(6)].filter(Boolean).join("-");
+  const digits = value
+    .replace(/\D/g, "")
+    .replace(/^1(?=\d{10})/, "")
+    .slice(0, 10);
+  return [digits.slice(0, 3), digits.slice(3, 6), digits.slice(6)]
+    .filter(Boolean)
+    .join("-");
 }
 
 type WalkthroughFormProps = {
@@ -34,7 +39,9 @@ export function WalkthroughForm({
   compact = false,
 }: WalkthroughFormProps) {
   const id = useId();
-  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">(
+    "idle",
+  );
   const [error, setError] = useState("");
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -42,14 +49,21 @@ export function WalkthroughForm({
     setStatus("sending");
     setError("");
 
-    const data = Object.fromEntries(new FormData(event.currentTarget));
+    const body = {
+      ...Object.fromEntries(new FormData(event.currentTarget)),
+      source: compact ? "hero" : "walkthrough",
+    };
+    console.log("[walkthrough] submit", body);
     try {
       const res = await fetch("/api/walkthrough", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, source: compact ? "hero" : "walkthrough" }),
+        body: JSON.stringify(body),
       });
-      const json: { ok?: boolean; error?: string } = await res.json().catch(() => ({}));
+      const json: { ok?: boolean; error?: string } = await res
+        .json()
+        .catch(() => ({}));
+      console.log("[walkthrough] response", res.status, json);
       if (!res.ok || !json.ok) throw new Error(json.error ?? "");
       setStatus("done");
     } catch (err) {
@@ -123,7 +137,10 @@ export function WalkthroughForm({
           </p>
         </div>
       ) : (
-        <form onSubmit={onSubmit} className={cn("relative rounded-[6px] bg-white", pad)}>
+        <form
+          onSubmit={onSubmit}
+          className={cn("relative rounded-[6px] bg-white", pad)}
+        >
           <h3
             className={cn(
               "font-display font-extrabold tracking-[-0.025em] text-text",
@@ -195,9 +212,17 @@ export function WalkthroughForm({
           </div>
 
           {/* Honeypot for bots; hidden from people and assistive tech. */}
-          <div aria-hidden="true" className="absolute -left-[9999px] size-px overflow-hidden">
+          <div
+            aria-hidden="true"
+            className="absolute -left-[9999px] size-px overflow-hidden"
+          >
             <label htmlFor={`${id}-website`}>Website</label>
-            <input id={`${id}-website`} name="website" tabIndex={-1} autoComplete="off" />
+            <input
+              id={`${id}-website`}
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+            />
           </div>
 
           {status === "error" ? (
@@ -205,9 +230,12 @@ export function WalkthroughForm({
               role="alert"
               className="mt-5 rounded-[4px] border border-red/30 bg-red-soft px-3.5 py-3 text-[0.875rem] leading-[1.5] text-red"
             >
-              {error || "We couldn't send your request right now."} Please try again or
-              call{" "}
-              <a href={site.phoneHref} className="font-semibold underline underline-offset-2">
+              {error || "We couldn't send your request right now."} Please try
+              again or call{" "}
+              <a
+                href={site.phoneHref}
+                className="font-semibold underline underline-offset-2"
+              >
                 {site.phone}
               </a>
               .
@@ -253,7 +281,10 @@ function TextField({
   id,
   label,
   ...props
-}: { id: string; label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
+}: {
+  id: string;
+  label: string;
+} & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div>
       <label htmlFor={id} className={labelClass}>
@@ -281,7 +312,12 @@ function SelectField({
       <label htmlFor={id} className={labelClass}>
         {label}
       </label>
-      <select id={id} defaultValue="" className={cn(fieldClass, "mt-2")} {...props}>
+      <select
+        id={id}
+        defaultValue=""
+        className={cn(fieldClass, "mt-2")}
+        {...props}
+      >
         <option value="" disabled>
           {placeholder}
         </option>

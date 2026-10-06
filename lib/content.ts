@@ -39,11 +39,11 @@ export const hero = {
   primary: "Book a 30-minute walkthrough",
   secondary: "Explore an example transcript",
   visual: {
-    // Standalone PitBullTax Transcripts screen (not the full software).
-    src: "/live/admin-access-sharing.webp",
-    width: 509,
-    height: 305,
-    alt: "PitBullTax Transcripts View Reports screen with the transcripts menu and a list of sample client transcript reports",
+    // G01: the approved standalone Request Transcripts screen.
+    src: "/screens/g01-request-transcripts.webp",
+    width: 1600,
+    height: 1819,
+    alt: "PitBullTax Transcripts Request Transcripts screen with taxpayer fields, transcript types and selectable tax periods",
   },
   form: {
     title: "See it with your workflow",
@@ -72,7 +72,7 @@ type TimelineEvent = {
   date: string;
   label: string;
   amount: string;
-  tone: "act" | "review" | "payment" | "info";
+  tone: "review" | "payment" | "info";
   detail: string;
   action: string;
 };
@@ -84,7 +84,6 @@ export const transcriptExample = {
   example: "Illustrative example. No real client information.",
   scale: ["2023", "Jul 2023", "Jan 2024", "Jul 2024", "Jan 2025"],
   legend: [
-    { label: "Act now", tone: "act" },
     { label: "Review", tone: "review" },
     { label: "Payment", tone: "payment" },
     { label: "Information", tone: "info" },
@@ -149,12 +148,12 @@ export const transcriptExample = {
       code: "TC 971",
       pos: "86%",
       date: "Jun 10, 2024",
-      label: "Notice issued",
+      label: "Miscellaneous transaction",
       amount: "$0.00",
-      tone: "act",
+      tone: "review",
       detail:
-        "This example shows how a notice can appear alongside the account history. Review the underlying IRS record and the client’s circumstances before deciding what to do next.",
-      action: "Act now",
+        "TC 971 is a miscellaneous transaction; its action code explains what happened. Check the action code and the underlying IRS record before deciding on next steps.",
+      action: "Review",
     },
   ] satisfies TimelineEvent[],
 };
@@ -207,9 +206,9 @@ export const platform = {
       links: ["Bulk requests", "Scheduled requests"],
       image: {
         label: "Request Transcripts",
-        src: "/screens/request-transcripts-standalone.webp",
-        width: 1468,
-        height: 857,
+        src: "/screens/g01-request-transcripts.webp",
+        width: 1600,
+        height: 1819,
         alt: "PitBullTax Request Transcripts screen with taxpayer details and transcript types, including account, wage and income, and record of account, with selectable tax periods",
       },
     },
@@ -219,9 +218,9 @@ export const platform = {
       links: ["Transcript reports", "Account activity"],
       image: {
         label: "Account Transcript Summary",
-        src: "/screens/account-transcript-summary-standalone.webp",
-        width: 650,
-        height: 460,
+        src: "/screens/g02-account-transcript-summary.webp",
+        width: 1600,
+        height: 1279,
         alt: "PitBullTax Account Transcript Summary Report for a sample taxpayer, listing each period's transactions with codes, explanations, dates and amounts",
       },
     },
@@ -231,9 +230,9 @@ export const platform = {
       links: ["Alerts", "Monitoring"],
       image: {
         label: "View Alerts",
-        src: "/screens/view-alerts-standalone.webp",
-        width: 1395,
-        height: 945,
+        src: "/screens/view-alerts-approved.webp",
+        width: 1429,
+        height: 1100,
         alt: "PitBullTax View Alerts screen listing account events such as tax return filed, notice issued CP 504 and offer in compromise accepted",
       },
     },
@@ -243,9 +242,9 @@ export const platform = {
       links: ["Client summary", "Reports"],
       image: {
         label: "Income Tax Liability Report",
-        src: "/screens/income-tax-liability-report-standalone.webp",
-        width: 650,
-        height: 460,
+        src: "/screens/g03-income-tax-liability-report.webp",
+        width: 1600,
+        height: 925,
         alt: "PitBullTax Income Tax Liability Report for a sample taxpayer with tax assessed, penalties, interest and balance due by period",
       },
     },
@@ -295,15 +294,15 @@ export const product = {
   videoLabel: "Watch the PitBullTax transcript walkthrough",
   videoCaption: "Follow a sample request through the platform.",
   shots: [
-    // Standalone PitBullTax Transcripts screens (replacement images).
+    // G01 (with Request transcripts wording) and G02.
     {
-      src: "/screens/request-transcripts-standalone.webp",
+      src: "/screens/g01-request-transcripts.webp",
       alt: "PitBullTax Request Transcripts screen with taxpayer details, transcript types and selectable tax periods",
-      title: "Transcript request queue",
-      caption: "Manage client, type, period, and request status.",
+      title: "Request transcripts",
+      caption: "Choose the taxpayer, transcript types, and tax periods.",
     },
     {
-      src: "/screens/account-transcript-summary-standalone.webp",
+      src: "/screens/g02-account-transcript-summary.webp",
       alt: "PitBullTax Account Transcript Summary Report with each period's transactions, codes, dates and amounts",
       title: "Account activity and report",
       caption: "Review key information before sharing a summary.",
@@ -325,7 +324,7 @@ export const csed = {
 
 export const steps = {
   eyebrow: "How it works",
-  title: "From authorization to action in three steps.",
+  title: "See PitBullTax in three steps.",
   items: [
     {
       n: "1",
@@ -339,16 +338,18 @@ export const steps = {
       n: "2",
       title: "See the workflow",
       body: "Follow a request through account activity, monitoring, and reporting.",
-      image: "/screens/account-transcript-summary-standalone.webp",
-      alt: "PitBullTax Account Transcript Summary Report with each period's transactions, codes, dates and amounts",
+      image: "/screens/g01-request-transcripts.webp",
+      alt: "PitBullTax Transcripts Request Transcripts screen with taxpayer fields, transcript types and selectable tax periods",
       video: false,
     },
     {
       n: "3",
       title: "Explore the fit",
       body: "Discuss access, training, and available next steps with the PitBullTax team.",
-      image: "/screens/view-alerts-standalone.webp",
-      alt: "PitBullTax View Alerts screen listing account events such as tax return filed and notices issued",
+      // G10: standalone tutorial card, linked to that exact tutorial.
+      image: "/screens/g10-transcripts-tutorial-card.webp",
+      alt: "Video tutorial card: IRS Transcripts Delivery & Reporting, PitBullTax Transcripts Video Tutorial",
+      href: "https://www.youtube.com/watch?v=Z4SuDpu1WDQ",
       video: false,
     },
   ],
@@ -395,8 +396,8 @@ export const walkthrough = {
 };
 
 export const feedback = {
-  eyebrow: "Practitioner feedback",
-  title: "See how practitioners put transcript information to work.",
+  eyebrow: "Built for your workflow",
+  title: "Built for the way your team works with transcripts.",
   body: "Teams use PitBullTax to organize transcript requests, review account activity, and communicate findings with clients. Explore the workflow in a walkthrough tailored to your practice.",
   cta: "See it for your firm",
   items: [

@@ -1,13 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight } from "lucide-react";
 
 import { cn } from "cn";
 import { transcriptExample } from "@/lib/content";
 
 const toneDot: Record<string, string> = {
-  act: "bg-red",
   review: "bg-amber-400",
   payment: "bg-emerald-400",
   info: "bg-slate-400",
@@ -23,11 +21,15 @@ export function TranscriptExample() {
     const list = chips.current;
     const chip = list?.children[active] as HTMLElement | undefined;
     if (!list || !chip) return;
-    list.scrollLeft = chip.offsetLeft - (list.clientWidth - chip.offsetWidth) / 2;
+    list.scrollLeft =
+      chip.offsetLeft - (list.clientWidth - chip.offsetWidth) / 2;
   }, [active]);
 
   return (
-    <section id="live-transcript" className="scroll-mt-24 bg-navy pb-20 lg:pb-28">
+    <section
+      id="live-transcript"
+      className="scroll-mt-24 bg-navy pb-20 lg:pb-28"
+    >
       <div className="container-page">
         <div className="rounded-[6px] border border-line-dark bg-navy-2 p-6 sm:p-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -128,7 +130,9 @@ export function TranscriptExample() {
                     : "bg-navy-3 text-on-dark-2",
                 )}
               >
-                <span className={cn("size-2 rounded-full", toneDot[item.tone])} />
+                <span
+                  className={cn("size-2 rounded-full", toneDot[item.tone])}
+                />
                 {item.code}
               </button>
             ))}
@@ -149,14 +153,10 @@ export function TranscriptExample() {
             </div>
             <span
               className={cn(
-                "mono-xs inline-flex shrink-0 items-center gap-1.5 self-start rounded-[3px] px-3 py-2 uppercase sm:self-auto",
-                event.tone === "act"
-                  ? "bg-red text-white"
-                  : "bg-white/10 text-on-dark-2",
+                "mono-xs inline-flex shrink-0 items-center gap-1.5 self-start rounded-[3px] bg-white/10 px-3 py-2 text-on-dark-2 uppercase sm:self-auto",
               )}
             >
               {event.action}
-              {event.tone === "act" ? <ArrowRight className="size-3.5" /> : null}
             </span>
           </div>
         </div>

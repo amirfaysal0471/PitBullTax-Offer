@@ -27,13 +27,13 @@ export function Product() {
               key={shot.src}
               className="flex flex-col overflow-hidden rounded-[6px] border border-line-dark bg-navy-2 p-2"
             >
-              <div className="relative aspect-[16/10] overflow-hidden rounded-[3px] bg-white">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[3px] bg-white">
                 <Image
                   src={shot.src}
                   alt={shot.alt}
                   fill
                   sizes="(max-width: 1024px) 92vw, 600px"
-                  className="object-cover object-left-top"
+                  className="object-contain object-top"
                 />
               </div>
               <figcaption className="px-3 pt-4 pb-2">
