@@ -109,7 +109,7 @@ export function Platform() {
                             alt={card.image.alt}
                             fill
                             sizes={large ? "(max-width: 1024px) 88vw, 540px" : "(max-width: 1024px) 88vw, 360px"}
-                            className="object-contain object-top"
+                            className="object-cover object-left-top"
                           />
                         </div>
                       </>

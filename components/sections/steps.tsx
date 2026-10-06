@@ -27,12 +27,12 @@ export function Steps() {
                 ) : null}
               </div>
 
-              {/* 4:3 frame; screens use contain + center top so nothing is cropped. */}
-              <div className="relative mt-6 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[4px] border border-line bg-paper">
+              {/* 8:9 frame (the G10 card's ratio); images cover it from the top, so any crop is at the bottom. */}
+              <div className="relative mt-6 flex aspect-[8/9] items-center justify-center overflow-hidden rounded-[4px] border border-line bg-paper">
                 {step.video ? (
                   <Video
                     compact
-                    className="w-full rounded-none bg-paper"
+                    fill
                     poster={{ src: step.image, alt: step.alt }}
                   />
                 ) : "href" in step && step.href ? (
@@ -48,7 +48,7 @@ export function Steps() {
                       alt={step.alt}
                       fill
                       sizes="(max-width: 640px) 90vw, 30vw"
-                      className="object-contain object-top"
+                      className="object-cover object-top"
                     />
                   </a>
                 ) : (
@@ -57,7 +57,7 @@ export function Steps() {
                     alt={step.alt}
                     fill
                     sizes="(max-width: 640px) 90vw, 30vw"
-                    className="object-contain object-top"
+                    className="object-cover object-top"
                   />
                 )}
               </div>

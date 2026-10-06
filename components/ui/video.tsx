@@ -13,19 +13,24 @@ export function Video({
   poster,
   className,
   compact = false,
+  fill = false,
 }: {
   label?: string;
   caption?: string;
   poster?: { src: string; alt: string };
   className?: string;
   compact?: boolean;
+  /** Cover the parent frame instead of using a 16:9 box. */
+  fill?: boolean;
 }) {
   const [playing, setPlaying] = useState(false);
 
   return (
     <div
       className={cn(
-        "relative aspect-video overflow-hidden rounded-[4px] bg-navy-2",
+        fill
+          ? "absolute inset-0 overflow-hidden"
+          : "relative aspect-video overflow-hidden rounded-[4px] bg-navy-2",
         className,
       )}
     >
@@ -52,7 +57,7 @@ export function Video({
             sizes="(max-width: 768px) 100vw, 900px"
             className={cn(
               "transition-transform duration-500 group-hover:scale-[1.02]",
-              poster ? "object-contain" : "object-cover",
+              "object-cover object-top",
             )}
           />
           <span
@@ -67,7 +72,10 @@ export function Video({
               )}
             >
               <Play
-                className={cn("fill-white text-white", compact ? "size-5" : "size-7")}
+                className={cn(
+                  "fill-white text-white",
+                  compact ? "size-5" : "size-7",
+                )}
               />
             </span>
             {label ? (
