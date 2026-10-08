@@ -40,6 +40,7 @@ export const hero = {
   secondary: "Explore an example transcript",
   visual: {
     // G01: the approved standalone Request Transcripts screen.
+    caption: "PitBullTax Transcripts · Request transcripts",
     src: "/screens/g01-request-transcripts.webp",
     width: 1600,
     height: 1819,

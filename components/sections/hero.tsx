@@ -16,7 +16,8 @@ export function Hero() {
       />
 
       <div className="container-page relative">
-        <div className="grid grid-cols-[minmax(0,1fr)] items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:gap-14">
+        {/* Copy and form start on the same top line. */}
+        <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:gap-14">
           <div>
             <Eyebrow>{hero.eyebrow}</Eyebrow>
 
@@ -37,23 +38,28 @@ export function Hero() {
             </div>
           </div>
 
-          <div>
-            <WalkthroughForm compact {...hero.form} />
-
-            {/* Product visual sits below the form, so nothing overlaps it. */}
-            <div className="mt-6 overflow-hidden rounded-[6px] border border-line-dark bg-navy-2 p-1.5 shadow-[0_26px_60px_rgba(0,0,0,.45)]">
-              <Image
-                src={hero.visual.src}
-                alt={hero.visual.alt}
-                width={hero.visual.width}
-                height={hero.visual.height}
-                preload
-                sizes="(max-width: 1024px) 92vw, 480px"
-                className="h-auto w-full rounded-[3px]"
-              />
-            </div>
-          </div>
+          <WalkthroughForm compact {...hero.form} />
         </div>
+
+        {/* G01 spans the full width below copy and form; it fills the frame from the top. */}
+        <figure className="mt-12 overflow-hidden rounded-[6px] border border-line-dark bg-navy-2 shadow-[0_26px_60px_rgba(0,0,0,.45)] lg:mt-14">
+          <figcaption className="flex items-center gap-2 border-b border-line-dark px-4 py-2.5">
+            <span aria-hidden="true" className="size-2.5 rounded-full bg-red/80" />
+            <span aria-hidden="true" className="size-2.5 rounded-full bg-amber-400/80" />
+            <span aria-hidden="true" className="size-2.5 rounded-full bg-emerald-400/80" />
+            <span className="mono-xs ml-2 text-on-dark-3">{hero.visual.caption}</span>
+          </figcaption>
+          <div className="relative aspect-[4/5] bg-white sm:aspect-[16/10] lg:aspect-[2/1]">
+            <Image
+              src={hero.visual.src}
+              alt={hero.visual.alt}
+              fill
+              preload
+              sizes="(max-width: 1280px) 92vw, 1200px"
+              className="object-cover object-left-top"
+            />
+          </div>
+        </figure>
       </div>
     </section>
   );
