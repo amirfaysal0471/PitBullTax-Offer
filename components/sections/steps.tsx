@@ -40,7 +40,7 @@ export function Steps() {
                     href={step.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`${step.alt} (opens YouTube)`}
+                    aria-label={step.linkLabel}
                     className="absolute inset-0 transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-red"
                   >
                     <Image
