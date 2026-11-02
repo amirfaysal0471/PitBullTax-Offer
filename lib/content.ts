@@ -66,15 +66,16 @@ export const proofStrip = {
   ],
 };
 
+export type TimelineCategory = "assessment" | "payment" | "review" | "info";
+
 type TimelineEvent = {
   code: string;
-  pos: string;
+  /** ISO date (yyyy-mm-dd); it sets both the displayed date and the marker position. */
   date: string;
   label: string;
   amount: string;
-  tone: "review" | "payment" | "info";
+  category: TimelineCategory;
   detail: string;
-  action: string;
 };
 
 export const transcriptExample = {
@@ -82,78 +83,70 @@ export const transcriptExample = {
   subtitle:
     "Explore an illustrative account transcript to see how events, dates, balances, and notices come together.",
   example: "Illustrative example. No real client information.",
-  scale: ["2023", "Jul 2023", "Jan 2024", "Jul 2024", "Jan 2025"],
-  legend: [
-    { label: "Review", tone: "review" },
-    { label: "Payment", tone: "payment" },
-    { label: "Information", tone: "info" },
-  ],
+  // Axis ticks (yyyy-mm); the first and last are the ends of the date scale.
+  ticks: ["2023-01", "2023-04", "2023-07", "2023-10", "2024-01", "2024-04", "2024-07"],
+  // One label per category, shared by the legend, the markers, and the detail badge.
+  categories: {
+    assessment: "Assessment",
+    payment: "Payment",
+    review: "Review",
+    info: "Information",
+  } satisfies Record<TimelineCategory, string>,
+  // Keep events in date order and a couple of months apart so their markers do not overlap.
   events: [
     {
-      code: "TC 150",
-      pos: "9%",
-      date: "May 15, 2023",
-      label: "Return filed and assessed",
-      amount: "$18,420",
-      tone: "payment",
-      detail:
-        "The original return posted and the tax was assessed for this period.",
-      action: "Note the date",
-    },
-    {
       code: "TC 806",
-      pos: "17%",
-      date: "May 15, 2023",
+      date: "2023-04-18",
       label: "Withholding credit applied",
       amount: "-$6,110",
-      tone: "info",
+      category: "info",
       detail:
-        "Credits from W-2 withholding reduced the assessed balance for the period.",
-      action: "Information",
+        "Credits from W-2 withholding were applied as of the return due date and reduced the balance for the period.",
+    },
+    {
+      code: "TC 150",
+      date: "2023-07-10",
+      label: "Return filed and assessed",
+      amount: "$18,420",
+      category: "assessment",
+      detail:
+        "The original return posted and the tax was assessed for this period.",
     },
     {
       code: "TC 196",
-      pos: "36%",
-      date: "Jul 24, 2023",
+      date: "2023-10-02",
       label: "Interest assessed",
       amount: "$412",
-      tone: "review",
+      category: "assessment",
       detail:
         "Interest was assessed on the unpaid balance for the period.",
-      action: "Review",
     },
     {
       code: "TC 582",
-      pos: "44%",
-      date: "Jan 08, 2024",
+      date: "2024-01-08",
       label: "Lien filed",
       amount: "$0.00",
-      tone: "review",
+      category: "review",
       detail:
         "The account shows a notice of federal tax lien for the unpaid assessment.",
-      action: "Review",
     },
     {
       code: "TC 670",
-      pos: "58%",
-      date: "Jun 03, 2024",
+      date: "2024-03-18",
       label: "Subsequent payment received",
       amount: "-$1,500",
-      tone: "payment",
+      category: "payment",
       detail:
         "A payment posted to the period and reduced the outstanding balance.",
-      action: "Payment",
     },
     {
       code: "TC 971",
-      pos: "86%",
-      date: "Jun 10, 2024",
+      date: "2024-06-10",
       label: "Miscellaneous transaction",
       amount: "$0.00",
-      tone: "review",
+      category: "review",
       detail:
         "TC 971 is a miscellaneous transaction; its action code explains what happened. Check the action code and the underlying IRS record before deciding on next steps.",
-      action: "Review",
     },
   ] satisfies TimelineEvent[],
 };
@@ -352,12 +345,14 @@ export const steps = {
     },
     {
       n: "3",
-      title: "Explore the fit",
-      body: "Discuss access, training, and available next steps with the PitBullTax team.",
+      title: "Watch the tutorial",
+      body: "See how transcript delivery and reporting work in the PitBullTax video tutorial on YouTube.",
       // G10: standalone tutorial card, linked to that exact tutorial.
       image: "/screens/g10-transcripts-tutorial-card.webp",
       alt: "Video tutorial card: IRS Transcripts Delivery & Reporting, PitBullTax Transcripts Video Tutorial",
       href: "https://www.youtube.com/watch?v=Z4SuDpu1WDQ",
+      linkLabel:
+        "Watch the IRS Transcripts Delivery & Reporting video tutorial on YouTube (opens in a new tab)",
       video: false,
     },
   ],
@@ -427,7 +422,7 @@ export const faq = {
   items: [
     {
       q: "Which transcripts can I request?",
-      a: "PitBullTax supports transcript request workflows for authorized client accounts. We will show the currently available transcript types and tax periods during your walkthrough.",
+      a: "For authorized client accounts, you can request Account, Wage & Income, Wage & Income Summary, Tax Return, Record of Account, Separate Assessment, and Civil Penalty transcripts. The tax periods you can select depend on the transcript type and what the IRS makes available, and the request screen lists them for each type.",
     },
     {
       q: "What authorization do I need?",
