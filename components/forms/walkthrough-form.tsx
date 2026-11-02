@@ -265,15 +265,16 @@ export function WalkthroughForm({
             )}
           </button>
 
-          <p className="mt-4 text-[0.8125rem] leading-[1.5] text-text-3">
+          <p className="mt-4 text-[0.875rem] leading-[1.55] text-text-2">
             {note}{" "}
             <a
               href={site.privacyHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline underline-offset-2 hover:text-text"
+              className="rounded-[2px] font-medium text-text underline underline-offset-2 hover:text-red focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"
             >
               See our Privacy Policy.
+              <span className="sr-only"> (opens in a new tab)</span>
             </a>
           </p>
         </form>
