@@ -40,7 +40,6 @@ export const hero = {
   secondary: "Explore an example transcript",
   visual: {
     // G01: the approved standalone Request Transcripts screen.
-    caption: "PitBullTax Transcripts · Request transcripts",
     src: "/screens/g01-request-transcripts.webp",
     width: 1600,
     height: 1819,
@@ -319,6 +318,14 @@ export const csed = {
   tollingLabel: "Tolling days",
   resultDate: "Illustrative CSED",
   resultRemaining: "Time remaining",
+  errors: {
+    assessment: "Enter a valid assessment date.",
+    tollingNegative: "Tolling days can't be negative. Enter 0 or more.",
+    tollingWhole: "Enter tolling days as a whole number.",
+    tollingMax: "Enter 3,650 tolling days or fewer.",
+  },
+  invalidResult:
+    "Enter a valid assessment date and tolling days to see the illustrative CSED.",
   disclaimer:
     "Illustration only. This result is not a determination of the actual CSED. Confirm the full IRS record and applicable suspensions.",
 };

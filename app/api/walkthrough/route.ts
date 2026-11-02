@@ -42,13 +42,13 @@ function parseLead(body: Record<string, unknown>): Lead | string {
   };
 
   if (!lead.firstName) return "First name is required.";
+  if (!lead.lastName) return "Last name is required.";
   if (!EMAIL.test(lead.email)) return "A valid work email is required.";
+  if (!lead.phone)
+    return "Please enter a phone number in the format xxx-xxx-xxxx.";
 
-  // The full form (red section) also requires last name, state and professional type.
+  // The full form (red section) also requires state and professional type.
   if (source === "walkthrough") {
-    if (!lead.lastName) return "Last name is required.";
-    if (!lead.phone)
-      return "Please enter a phone number in the format xxx-xxx-xxxx.";
     if (!lead.state || !usStates.includes(lead.state))
       return "Please select a state.";
     if (

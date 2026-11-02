@@ -53,7 +53,6 @@ export function WalkthroughForm({
       ...Object.fromEntries(new FormData(event.currentTarget)),
       source: compact ? "hero" : "walkthrough",
     };
-    console.log("[walkthrough] submit", body);
     try {
       const res = await fetch("/api/walkthrough", {
         method: "POST",
@@ -63,7 +62,6 @@ export function WalkthroughForm({
       const json: { ok?: boolean; error?: string } = await res
         .json()
         .catch(() => ({}));
-      console.log("[walkthrough] response", res.status, json);
       if (!res.ok || !json.ok) throw new Error(json.error ?? "");
       setStatus("done");
     } catch (err) {
@@ -80,6 +78,16 @@ export function WalkthroughForm({
       label="First name"
       autoComplete="given-name"
       placeholder="Jordan"
+      required
+    />
+  );
+  const lastName = (
+    <TextField
+      id={`${id}-last`}
+      name="lastName"
+      label="Last name"
+      autoComplete="family-name"
+      placeholder="Rivera"
       required
     />
   );
@@ -108,7 +116,7 @@ export function WalkthroughForm({
       onInput={(event) => {
         event.currentTarget.value = formatPhone(event.currentTarget.value);
       }}
-      required={!compact}
+      required
     />
   );
 
@@ -156,7 +164,10 @@ export function WalkthroughForm({
           <div className={cn("grid", compact ? "mt-5 gap-4" : "mt-7 gap-5")}>
             {compact ? (
               <>
-                {firstName}
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {firstName}
+                  {lastName}
+                </div>
                 {email}
                 {phone}
               </>
@@ -164,14 +175,7 @@ export function WalkthroughForm({
               <>
                 <div className="grid gap-5 sm:grid-cols-2">
                   {firstName}
-                  <TextField
-                    id={`${id}-last`}
-                    name="lastName"
-                    label="Last name"
-                    autoComplete="family-name"
-                    placeholder="Rivera"
-                    required
-                  />
+                  {lastName}
                 </div>
                 <div className="grid gap-5 sm:grid-cols-2">
                   {email}
@@ -198,6 +202,7 @@ export function WalkthroughForm({
                 <div>
                   <label htmlFor={`${id}-comments`} className={labelClass}>
                     Comments or questions
+                    <OptionalMark />
                   </label>
                   <textarea
                     id={`${id}-comments`}
@@ -277,9 +282,23 @@ export function WalkthroughForm({
   );
 }
 
+// Visual cue only: the input's own `required` attribute is what assistive tech announces.
+function RequiredMark() {
+  return (
+    <span aria-hidden="true" className="ml-0.5 text-red">
+      *
+    </span>
+  );
+}
+
+function OptionalMark() {
+  return <span className="font-normal text-text-3"> (optional)</span>;
+}
+
 function TextField({
   id,
   label,
+  required,
   ...props
 }: {
   id: string;
@@ -289,8 +308,14 @@ function TextField({
     <div>
       <label htmlFor={id} className={labelClass}>
         {label}
+        {required ? <RequiredMark /> : <OptionalMark />}
       </label>
-      <input id={id} className={cn(fieldClass, "mt-2")} {...props} />
+      <input
+        id={id}
+        required={required}
+        className={cn(fieldClass, "mt-2")}
+        {...props}
+      />
     </div>
   );
 }
@@ -300,6 +325,7 @@ function SelectField({
   label,
   options,
   placeholder = "Select one",
+  required,
   ...props
 }: {
   id: string;
@@ -311,10 +337,12 @@ function SelectField({
     <div>
       <label htmlFor={id} className={labelClass}>
         {label}
+        {required ? <RequiredMark /> : <OptionalMark />}
       </label>
       <select
         id={id}
         defaultValue=""
+        required={required}
         className={cn(fieldClass, "mt-2")}
         {...props}
       >
